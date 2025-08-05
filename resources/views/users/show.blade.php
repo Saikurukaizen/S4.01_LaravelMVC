@@ -7,6 +7,6 @@
     <title>Fitbit | Ficha del Usuario</title>
 </head>
 <body>
-    <h1>Ficha del usuario : <?php echo $idUser; ?></h1>
+    <h1>Ficha del usuario : {{ $idUser }}</h1>
 </body>
 </html>
