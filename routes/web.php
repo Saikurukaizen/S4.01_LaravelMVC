@@ -6,21 +6,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\CommunityController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', HomeController::class);
 
 Route::get('/users', [UserController::class, 'index']);
-
-Route::get('/users/create', [UserController::class, 'createUser']);
-
-Route::get('/users/{id}', [UserController::class, 'getUserById']);
+Route::get('/users/create', [UserController::class, 'create']);
+Route::get('/users/{id}', [UserController::class, 'show']);
 
 Route::get('/disciplines', [DisciplineController::class, 'index']);
-
-Route::get('/disciplines/{id}', [DisciplineController::class, 'getDisciplineById']);
+Route::get('/disciplines/{id}', [DisciplineController::class, 'show']);
 
 Route::get('/communities', [CommunityController::class, 'index']);
-
-Route::get('/communities/{id}', [CommunityController::class, 'getCommunityById']);
+Route::get('/communities/{id}', [CommunityController::class, 'show']);
 
 //Get: Obtener un registro
 //Post: Crear un nuevo registro

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(){
-        return "Welcome!!";
+    public function __invoke(){
+        return view('home');
     }
 }

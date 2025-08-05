@@ -10,7 +10,7 @@ class DisciplineController extends Controller
         return "Lista de disciplinas";
     }
 
-    public function getDisciplineById($idDisc){
+    public function show($idDisc){
         return "Ficha de la disciplina con ID: " . $idDisc;
     }
 }

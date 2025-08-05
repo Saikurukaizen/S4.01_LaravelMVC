@@ -10,7 +10,7 @@ class CommunityController extends Controller
         return "Lista de comunidades";
     }
 
-    public function getCommunityById($idComm){
+    public function show($idComm){
         return "Ficha de la comunidad con ID: " . $idComm;
     }
 }

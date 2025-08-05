@@ -10,11 +10,11 @@ class UserController extends Controller
         return "Lista de usuarios";
     }
 
-    public function createUser(){
+    public function create(){
         return "Formulario para crear un nuevo usuario";
     }
 
-    public function getUserById($idUser){
+    public function show($idUser){
         return "Ficha del usuario con ID: " . $idUser;
     }
 }
