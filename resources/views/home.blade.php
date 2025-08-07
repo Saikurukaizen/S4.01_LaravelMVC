@@ -11,9 +11,13 @@
     <div class="max-w-3xl mx-auto p-4">
         <h1>Welcome to Fitbit!</h1>
 
-        <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-            <span class="font-medium">Info alert!</span> Change a few things up and try submitting again.
-        </div>
+        <x-alert type="info">
+            <x-slot name="titulo">
+                Título Alerta
+            </x-slot>
+            Contenido de la alerta
+        </x-alert>
+
     </div>
 </body>
 </html>
