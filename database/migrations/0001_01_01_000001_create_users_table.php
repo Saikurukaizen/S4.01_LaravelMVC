@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('communities', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyText('description');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('lastname');
+            $table->date('date_of_birth');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->string('bank_acc')->unique();
             $table->foreignId('discipline_id')->constrained('disciplines')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('communities');
+        Schema::dropIfExists('users');
     }
 };
