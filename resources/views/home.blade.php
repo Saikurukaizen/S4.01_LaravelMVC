@@ -2,6 +2,14 @@
 
 @section('title', 'Fitbit | Home')
 
+@push('css')
+    <style>
+    body{
+        background-color: #f3f3f3;
+    }
+    </style>
+@endpush
+
 @section('content')
 
     <div class="max-w-3xl mx-auto p-4">
