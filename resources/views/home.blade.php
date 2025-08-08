@@ -1,4 +1,9 @@
-<x-layout>
+@extends('layouts.app')
+
+@section('title', 'Fitbit | Home')
+
+@section('content')
+
     <div class="max-w-3xl mx-auto p-4">
         <x-alert2 type="success" class="mb-4">
             <x-slot name="titulo">
@@ -9,5 +14,6 @@
 
         <p>Welcome to Fitbit</p>
     </div>
-</x-layout>
+
+@endsection
 <!-- Plantilla básica con CDN TailwindCSS. Urgente diseñar vistas del CRUD y el Home Page-->
