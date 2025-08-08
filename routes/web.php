@@ -26,12 +26,28 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 //Delete: Eliminar un registro
 
 Route::get('prueba', function(){
+    
+    /* CREAR NUEVA DISCIPLINA
+
     $discipline = new Disciplines;
-    $discipline->name = 'Tai-Chi';
-    $discipline->description = 'Disciplina china de meditación en movimiento';
+    $discipline->name = 'Boxeo';
+    $discipline->description = 'Disciplina de combate que se centra en el uso de los puños.';
     $discipline->save();
 
     return $discipline;
+    */
+
+    //$discipline = Disciplines::find(1);
+
+
+    /* ACTUALIZAR UNA DISCIPLINA
+    
+    $discipline = Disciplines::where('name', 'Tai-Chi')->first();
+    $discipline->description = 'Combina movimientos del kung-fu con técnicas de respiración y meditación.';
+    $discipline->save();
+    
+    return $discipline; */
+   
 });
 
 /*
