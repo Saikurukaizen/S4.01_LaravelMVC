@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\CommunityController;
+use App\Models\Disciplines;
 
 Route::get('/', HomeController::class);
 
@@ -23,6 +24,15 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 //Put: Actualizar un registro
 //Patch: Actualizar parcialmente un registro
 //Delete: Eliminar un registro
+
+Route::get('prueba', function(){
+    $discipline = new Disciplines;
+    $discipline->name = 'Tai-Chi';
+    $discipline->description = 'Disciplina china de meditación en movimiento';
+    $discipline->save();
+
+    return $discipline;
+});
 
 /*
 Conclusiones sobre rutas y métodos HTTP en Laravel:
