@@ -5,7 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\CommunityController;
-use App\Models\Disciplines;
+use App\Models\User;
+use App\Models\Discipline;
+use App\Models\Community;
 
 Route::get('/', HomeController::class);
 
@@ -28,18 +30,17 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 Route::get('prueba', function(){
     
     //CREAR REGISTRO, NUEVA DISCIPLINA
-
-    /* 
+      
         $discipline = new Discipline;
-        $discipline->name = 'Bodybuilding';
-        $discipline->description = 'Levanta el peso del mundo y entrena esos músculos!';
-        $discipline->save();
+
+        $discipline = Discipline::find(1);
+
+        $discipline->name = 'BodyBuIldiNgPEso';
+        $discipline->description = 'Levanta el peso del mundo mundial y entrena esos músculos!';
+        
+        $discipline->save();   
 
         return $discipline;
-    */
-   
-
-        //$discipline = Discipline::find(1);
 
 
     //ACTUALIZAR REGISTRO DISCIPLINA
@@ -83,14 +84,9 @@ Route::get('prueba', function(){
     /*
         $discipline = Discipline::find(1);
         $discipline->delete();
-    
+
         return "Eliminado ";
-    */
-
-   
-
-
-   
+    */  
 });
 
 /*
