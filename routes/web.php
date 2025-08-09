@@ -29,19 +29,48 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 
 Route::get('prueba', function(){
     
-    //CREAR REGISTRO, NUEVA DISCIPLINA
-      
-        $discipline = new Discipline;
+    //CREAR NUEVO REGISTRO
+        //Usuarios
+        /* $user = new User;
+                
+        if(!User::where('email', 'freni@frenillo.com')->exists()) {
+            User::create([
+                'name' => 'Johnny',
+                'lastname' => 'Frenillo',
+                'date_of_birth' => '1988-10-01',
+                'email' => 'freni@frenillo.com',
+            'password' => bcrypt('123456'),
+            'bank_acc' => '123456789',
+            'discipline_id' => 2
+            ]);
+        return $user;
+        } else {
+            return response('El email ya está en uso.', 409);
+        } */
 
-        $discipline = Discipline::find(1);
 
-        $discipline->name = 'BodyBuIldiNgPEso';
-        $discipline->description = 'Levanta el peso del mundo mundial y entrena esos músculos!';
-        
-        $discipline->save();   
+        //Disciplinas
+        /* $discipline = new Discipline;
+        $discipline->name = 'BoDYBuIldeR';
+        $discipline->description = 'Levanta peso y gana músculo';
+
+        $discipline->save(); */
+        //Comunidades
+        $community = new Community;
+        $community->name = 'Pega Pega';
+        $community->description = 'Grupo de boxeo';
+        $community->user_id = 1;
+        $community->discipline_id = 2;
+        $community->save();
+
+        return $community;
+
+
+/* 
+        $discipline = Discipline::find(3);
 
         return $discipline;
-
+ */
 
     //ACTUALIZAR REGISTRO DISCIPLINA
     
@@ -87,7 +116,7 @@ Route::get('prueba', function(){
 
         return "Eliminado ";
     */  
-});
+
 
 /*
 Conclusiones sobre rutas y métodos HTTP en Laravel:
@@ -103,5 +132,5 @@ Conclusiones sobre rutas y métodos HTTP en Laravel:
 - PUT reemplaza el recurso completo, PATCH solo modifica los campos indicados.
 - No es necesario implementar autenticación si la navegación es tipo admin.
 */
-
+});
 ?>

@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('bank_acc')->unique();
-            $table->foreignId('discipline_id')->constrained('disciplines')->onDelete('cascade');
             $table->timestamps();
+            $table->foreignId('discipline_id')->constrained('disciplines')->onDelete('cascade');
+            
         });
     }
 
