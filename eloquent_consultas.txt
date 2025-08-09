@@ -1,0 +1,41 @@
+Consultas básicas de Eloquent ORM en Laravel
+
+Obtener todos los registros:
+$users = User::all();
+
+Obtener un registro por ID:
+$user = User::find($id);
+
+Filtrar registros (where):
+$users = User::where('name', 'Juan')->get();
+
+Obtener el primer registro que cumpla una condición:
+$user = User::where('email', 'juan@email.com')->first();
+
+Crear un nuevo registro:
+User::create(['name' => 'Juan', 'email' => 'juan@email.com', 'password' => bcrypt('1234')]);
+
+Actualizar un registro:
+User::where('id', $id)->update(['name' => 'Nuevo nombre']);
+// o
+$user = User::find($id);
+$user->name = 'Nuevo nombre';
+$user->save();
+
+Eliminar un registro:
+User::destroy($id);
+// o
+$user = User::find($id);
+$user->delete();
+
+Ordenar resultados:
+$users = User::orderBy('name', 'asc')->get();
+
+Limitar resultados:
+$users = User::limit(10)->get();
+
+Paginación:
+$users = User::paginate(10);
+
+Relaciones (ejemplo, obtener disciplina de un usuario):
+$user->discipline; // Si tienes la relación definida en el modelo

@@ -27,26 +27,69 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 
 Route::get('prueba', function(){
     
-    /* CREAR NUEVA DISCIPLINA
+    //CREAR REGISTRO, NUEVA DISCIPLINA
 
-    $discipline = new Disciplines;
-    $discipline->name = 'Boxeo';
-    $discipline->description = 'Disciplina de combate que se centra en el uso de los puños.';
-    $discipline->save();
+    /* 
+        $discipline = new Discipline;
+        $discipline->name = 'Bodybuilding';
+        $discipline->description = 'Levanta el peso del mundo y entrena esos músculos!';
+        $discipline->save();
 
-    return $discipline;
+        return $discipline;
+    */
+   
+
+        //$discipline = Discipline::find(1);
+
+
+    //ACTUALIZAR REGISTRO DISCIPLINA
+    
+    /*
+        $discipline = Discipline::where('name', 'Tai-Chi')->first();
+        $discipline->description = 'Combina movimientos del kung-fu con técnicas de respiración y meditación.';
+        $discipline->save();
+
+        return $discipline;
     */
 
-    //$discipline = Disciplines::find(1);
+    //TRAER VARIOS REGISTROS
+
+    /*
+        all() - Trae todos los registros
+        where() - Filtra los registros según la condición
+        En where(), se le puede pasar tres parámetros: nombre de la columna, un operador y el valor a comparar.
+        get() - Trae los registros que cumplen con una condición
+        find() - Trae un registro por su clave primaria.
+        first() - Trae el primer registro que cumple con una condición.
+        select() - Permite seleccionar columnas específicas.
+        take() - Limita la cantidad de registros a obtener.
+        orderBy() - Ordena los resultados según una columna. Ej: 
+            Discipline::orderBy('name', 'desc')->get();
+    */
+
+    //LISTAR TODAS LAS DISCIPLINAS
+
+    /*
+        $discipline = Discipline::orderBy('discipline', 'asc')
+                                        ->select('id', 'name', 'description')
+                                        ->take(2)
+                                        ->get();
+
+        return $discipline;
+    */
+
+    //ELIMINAR REGISTRO DISCIPLINA
+
+    /*
+        $discipline = Discipline::find(1);
+        $discipline->delete();
+    
+        return "Eliminado ";
+    */
+
+   
 
 
-    /* ACTUALIZAR UNA DISCIPLINA
-    
-    $discipline = Disciplines::where('name', 'Tai-Chi')->first();
-    $discipline->description = 'Combina movimientos del kung-fu con técnicas de respiración y meditación.';
-    $discipline->save();
-    
-    return $discipline; */
    
 });
 
