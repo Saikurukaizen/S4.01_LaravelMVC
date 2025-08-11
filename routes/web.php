@@ -28,6 +28,11 @@ Route::get('/communities/{id}', [CommunityController::class, 'show']);
 //Delete: Eliminar un registro
 
 Route::get('prueba', function(){
+
+    /*
+        Para ver los valores almacenados en la base de datos:
+        dd($variable->getAttributes())
+    */
     
     //CREAR NUEVO REGISTRO
         //Usuarios
@@ -50,13 +55,13 @@ Route::get('prueba', function(){
 
 
         //Disciplinas
-        $discipline = Discipline::create([
+        /* $discipline = Discipline::create([
             'name' => 'BoDYBuIldeR',
             'description' => 'Levanta peso y gana músculo'
         ]);
 
         // Mostrar el nombre con la primera letra en mayúscula (gracias al accessor)
-        return $discipline;
+        return $discipline; */
 
 
         //Comunidades
