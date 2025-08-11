@@ -38,8 +38,8 @@ class CommunitySeeder extends Seeder
         $community3->fill([
             'name' => 'Los Gymbros',
             'description' => 'Comunidad para amantes del culturismo',
-            'user_id' => 1,
-            'discipline_id' => 10
+            'user_id' => 2,
+            'discipline_id' => 3
         ]);
         $community3->save();
 

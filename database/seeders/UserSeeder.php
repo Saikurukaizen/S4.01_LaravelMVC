@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         $user->email = 'guest@guest.com';
         $user->password = bcrypt('5678');
         $user->bank_acc = 'ES654321';
-        $user->discipline_id = 10;
+        $user->discipline_id = 3;
 
         $user->save();
     }
