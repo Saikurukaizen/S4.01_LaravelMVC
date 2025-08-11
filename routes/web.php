@@ -50,20 +50,24 @@ Route::get('prueba', function(){
 
 
         //Disciplinas
-        /* $discipline = new Discipline;
-        $discipline->name = 'BoDYBuIldeR';
-        $discipline->description = 'Levanta peso y gana músculo';
+        $discipline = Discipline::create([
+            'name' => 'BoDYBuIldeR',
+            'description' => 'Levanta peso y gana músculo'
+        ]);
 
-        $discipline->save(); */
+        // Mostrar el nombre con la primera letra en mayúscula (gracias al accessor)
+        return $discipline;
+
+
         //Comunidades
-        $community = new Community;
-        $community->name = 'Pega Pega';
-        $community->description = 'Grupo de boxeo';
-        $community->user_id = 1;
-        $community->discipline_id = 2;
-        $community->save();
+       /*  $community = Community::create([
+            'name' => 'Pega Pega',
+            'description' => 'Grupo de boxeo',
+            'user_id' => 1,
+            'discipline_id' => 2
+        ]);
 
-        return $community;
+        return $community; */
 
 
 /* 

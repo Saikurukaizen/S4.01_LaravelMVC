@@ -13,11 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            UserSeeder::class,
+            DisciplineSeeder::class,
+            CommunitySeeder::class,
         ]);
+
+        //php artisan db:seed
+
+        //Todos los registros que guardemos aquí en el Seeder, se insertará en la base de datos
+        //cada vez que realizamos un comando :fresh o :refresh. Van a estar siempre.
+
+        //Se puede combinar los comandos usando php artisan migrate:fresh --seed
+
+        /*
+        Para crear más de un usuario
+        */
+        
     }
 }
