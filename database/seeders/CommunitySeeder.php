@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\CommunityName;
 use App\Models\Community;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,8 +17,8 @@ class CommunitySeeder extends Seeder
         $community1 = new Community();
 
         $community1->fill([
-            'name' => 'Tai-Chi Lovers',
-            'description' => 'Un espacio para compartir y practicar Tai-Chi.',
+            'name' => CommunityName::Taichi->value,
+            'description' => CommunityName::Taichi->description(),
             'user_id' => 1,
             'discipline_id' => 1
         ]);
@@ -26,8 +27,8 @@ class CommunitySeeder extends Seeder
         $community2 = new Community();
 
         $community2->fill([
-            'name' => 'Pega Pega',
-            'description' => 'Grupo de boxeo',
+            'name' => CommunityName::Boxeo->value,
+            'description' => CommunityName::Boxeo->description(),
             'user_id' => 1,
             'discipline_id' => 2
         ]);
@@ -36,8 +37,8 @@ class CommunitySeeder extends Seeder
         $community3 = new Community();
 
         $community3->fill([
-            'name' => 'Los Gymbros',
-            'description' => 'Comunidad para amantes del culturismo',
+            'name' => CommunityName::Bodybuilder->value,
+            'description' => CommunityName::Bodybuilder->description(),
             'user_id' => 2,
             'discipline_id' => 3
         ]);
