@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             CommunitySeeder::class,
         ]);
 
+        
+
         //php artisan db:seed
 
         //Todos los registros que guardemos aquí en el Seeder, se insertará en la base de datos
