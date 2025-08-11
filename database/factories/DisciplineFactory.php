@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\DisciplineName;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,10 +16,9 @@ class DisciplineFactory extends Factory
      */
     public function definition(): array
     {
-        $discipline = fake()->randomElement(DisciplineName::cases());
         return [
-            'name' => $discipline->value,
-            'description' => $discipline->description(),
+            'name' => fake()->unique()->word(),
+            'description' => fake()->text(50),
         ];
     }
 }

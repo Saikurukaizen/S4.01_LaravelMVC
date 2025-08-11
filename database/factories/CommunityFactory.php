@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Discipline;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class CommunityFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->unique()->company(),
+            'description' => fake()->text(50),
+            'user_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'discipline_id' => Discipline::inRandomOrder()->first()?->id ?? Discipline::factory(),
         ];
     }
 }
