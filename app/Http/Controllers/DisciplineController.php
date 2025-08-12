@@ -16,8 +16,6 @@ class DisciplineController extends Controller
     public function show($discipline){
         $discipline = Discipline::findOrFail($discipline);
 
-        return $discipline;
-
         return view('disciplines.show', [
             'discipline' => $discipline,
         ]);

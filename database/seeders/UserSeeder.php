@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       $user = new User();
+        $user = new User();
         $user->name = 'Admin';
         $user->lastname = 'Admin';
         $user->date_of_birth = '2000-08-11'; // Añade una fecha válida

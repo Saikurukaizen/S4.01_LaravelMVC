@@ -11,6 +11,6 @@
     {{-- tipografía --}}
 </head>
 <body>
-    <h1>Aquí se mostrarán la disciplina: {{ $discipline }} </h1>
+    <h1>Disciplina: {{ $discipline }} </h1>
 </body>
 </html>
