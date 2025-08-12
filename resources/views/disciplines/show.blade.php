@@ -11,6 +11,10 @@
     {{-- tipografía --}}
 </head>
 <body>
-    <h1>Disciplina: {{ $discipline }} </h1>
+
+    <a href="{{ route('disciplines.index') }}">Volver a la lista de disciplinas</a>
+    <h1>Disciplina: {{ $discipline->name }} </h1>
+    <p>Descripción: {{ $discipline->description }}</p>
+
 </body>
 </html>

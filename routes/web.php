@@ -10,13 +10,13 @@ use App\Models\Discipline;
 use App\Models\Community;
 
 Route::get('/', HomeController::class);
-
+//Route::get('/', function () { return view('home'); })->name('home');
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/users/create', [UserController::class, 'create']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 
-Route::get('/disciplines', [DisciplineController::class, 'index']);
-Route::get('/disciplines/create', [DisciplineController::class, 'create']);
+Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
+Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
 Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
 
 Route::get('/communities', [CommunityController::class, 'index']);
