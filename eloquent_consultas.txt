@@ -39,3 +39,5 @@ $users = User::paginate(10);
 
 Relaciones (ejemplo, obtener disciplina de un usuario):
 $user->discipline; // Si tienes la relación definida en el modelo
+
+COMENTARIO AL CREAR DEV
