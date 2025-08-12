@@ -17,8 +17,7 @@ class DisciplineSeeder extends Seeder
 
         $discipline1->fill([
             'name' => 'Tai-Chi',
-            'description' => 'Combina movimientos del kung-fu con técnicas de respiración
-                            y meditación.'
+            'description' => 'Combina movimientos del kung-fu con técnicas de respiración y meditación.'
         ]);
         $discipline1->save();
 

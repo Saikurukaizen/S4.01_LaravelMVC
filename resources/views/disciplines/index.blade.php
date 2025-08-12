@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fitbit | Lista de Disciplinas</title>
-</head>
-<body>
-    <h1>Lista de disciplinas</h1>
-</body>
-</html>
+<x-app-layout>
 
-</body>
-</html>
+    <h1>Lista de disciplinas</h1>
+
+    <ul>
+         @foreach($disciplines as $discipline)
+            <li>
+                <a href="{{ route('disciplines.show', $discipline->id) }}">
+                    {{ $discipline->name }}
+                </a>
+            </li>
+         @endforeach
+
+    </ul>
+
+</x-app-layout>

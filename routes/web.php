@@ -16,9 +16,11 @@ Route::get('/users/create', [UserController::class, 'create']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 
 Route::get('/disciplines', [DisciplineController::class, 'index']);
-Route::get('/disciplines/{id}', [DisciplineController::class, 'show']);
+Route::get('/disciplines/create', [DisciplineController::class, 'create']);
+Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
 
 Route::get('/communities', [CommunityController::class, 'index']);
+Route::get('/communities/create', [CommunityController::class, 'create']);
 Route::get('/communities/{id}', [CommunityController::class, 'show']);
 
 //Get: Obtener un registro
