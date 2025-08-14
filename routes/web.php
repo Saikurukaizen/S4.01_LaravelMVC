@@ -11,17 +11,27 @@ use App\Models\Community;
 
 Route::get('/', function () { return view('home'); })->name('home');
 
+Route::resource('disciplines', DisciplineController::class);
+/*
+Podemos renombrar la Route Resource usando ->names() y cambiar los parametros de la uri con otro valor
+como por ejemplo ->parameters(['disciplines' => 'disc']).
+El problema es que, nosotros, al crear una clase abstracta, en el que se ha de especificar exactamente el nombre
+de la ruta, no podemos utilizar el nombre corto.
+
+EN UNA API, NO VA A EXISTIR VISTAS Y, POR LO TANTO, NO VA A EXISTIR NI CREATE NI EDIT. Simplemente usaremos:
+Route::resource('disciplines', DisciplineController::class)
+        ->except(['create', 'edit']);
+Tambien hay un Route::apiResource('disciplines', DisciplineController::class);
+*/
+/*
 Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
 Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
 Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
 Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
-
 Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
-
 Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
-
 Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
-
+*/
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create']);
 Route::get('/users/{id}', [UserController::class, 'show']);

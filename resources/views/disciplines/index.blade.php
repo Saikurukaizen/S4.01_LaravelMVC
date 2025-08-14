@@ -17,4 +17,6 @@
 
     </ul>
 
+    {{ $items->links() }}
+
 </x-app-layout>
