@@ -1,18 +1,18 @@
 @include('components.form', [
-    'action' => route('disciplines.update', $discipline->id),
+    'action' => route('disciplines.update', $item->id),
     'method' => 'PUT',
     'fields' => [
         [
             'name' => 'name',
             'label' => 'Name',
             'type' => 'text',
-            'value' => $discipline->name
+            'value' => $item->name
         ],
         [
             'name' => 'description',
             'label' => 'Description',
             'type' => 'textarea',
-            'value' => $discipline->description
+            'value' => $item->description
         ],        
     ],
     'buttonText' => 'Update'

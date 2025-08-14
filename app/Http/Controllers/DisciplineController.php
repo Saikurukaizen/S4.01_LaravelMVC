@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Discipline;
 use Illuminate\Http\Request;
 
-class DisciplineController extends Controller
+class DisciplineController extends CrudController
 {
-    public function index(){
+
+    protected $model = Discipline::class;
+    protected $viewFolder = 'disciplines';
+
+    protected function validateData(Request $request){
+        return $request->validate([
+            'name' => 'required|string|max:50',
+            'description' => 'required|string|max:255',
+        ]);
+    }
+    /* public function index(){
 
         $disciplines = Discipline::all();
         return view('disciplines.index', compact('disciplines'));
@@ -62,5 +72,5 @@ class DisciplineController extends Controller
 
         return redirect()->route('disciplines.index')
         ->with('success', 'Deleted successfully: ' . $discipline->name);
-    }
+    } */
 }

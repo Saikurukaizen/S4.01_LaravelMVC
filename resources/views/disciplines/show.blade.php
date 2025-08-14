@@ -8,24 +8,24 @@
                 'name' => 'name',
                 'label' => 'Name',
                 'type' => 'text',
-                'value' => $discipline->name
+                'value' => $item->name
             ],
             [
                 'name' => 'description',
                 'label' => 'Description',
                 'type' => 'textarea',
-                'value' => $discipline->description
+                'value' => $item->description
             ],        
         ],
         'showButton' => false
     ])
     <div class="flex gap-2 mt-4">
-        <form action="{{ route('disciplines.destroy', $discipline->id) }}" method="POST" onsubmit="return confirm('¿Seguro que quieres eliminar esta disciplina?');">
+        <form action="{{ route('disciplines.destroy', $item->id) }}" method="POST" onsubmit="return confirm('¿Are you sure you want to delete this discipline?');">
             @csrf
             @method('DELETE')
             <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Eliminar</button>
         </form>
-        <form action="{{ route('disciplines.edit', $discipline->id) }}" method="GET">
+        <form action="{{ route('disciplines.edit', $item->id) }}" method="GET">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
         </form>
         <form action="{{ route('disciplines.index') }}" method="GET">
