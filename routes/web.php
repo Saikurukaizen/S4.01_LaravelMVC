@@ -14,8 +14,13 @@ Route::get('/', function () { return view('home'); })->name('home');
 Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
 Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
 Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
+Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
 
 Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
+
+Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
+
+Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create']);

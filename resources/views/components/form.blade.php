@@ -17,8 +17,9 @@
             @enderror
         </div>
     @endforeach
-
-    <button type="submit" class="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600">
-        {{ $buttonText ?? 'Save'}}
-    </button>
+    @if($showButton ?? true)
+        <button type="submit" class="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600">
+            {{ $buttonText ?? 'Save'}}
+        </button>
+    @endif
 </form>
