@@ -9,17 +9,19 @@ use App\Models\User;
 use App\Models\Discipline;
 use App\Models\Community;
 
-Route::get('/', HomeController::class);
-//Route::get('/', function () { return view('home'); })->name('home');
-Route::get('/users', [UserController::class, 'index']);
-Route::get('/users/create', [UserController::class, 'create']);
-Route::get('/users/{id}', [UserController::class, 'show']);
+Route::get('/', function () { return view('home'); })->name('home');
 
 Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
 Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
 Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
 
-Route::get('/communities', [CommunityController::class, 'index']);
+Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create']);
+Route::get('/users/{id}', [UserController::class, 'show']);
+
+Route::get('/communities', [CommunityController::class, 'index'])->name('communities.index');
 Route::get('/communities/create', [CommunityController::class, 'create']);
 Route::get('/communities/{id}', [CommunityController::class, 'show']);
 

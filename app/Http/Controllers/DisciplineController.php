@@ -13,6 +13,10 @@ class DisciplineController extends Controller
         return view('disciplines.index', compact('disciplines'));
     }
 
+    public function create(){
+        return view('disciplines.create');
+    }
+
     public function show($discipline){
         $discipline = Discipline::findOrFail($discipline);
 

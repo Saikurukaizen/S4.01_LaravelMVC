@@ -76,7 +76,7 @@ vistas de create, edit y hasta en show.
 
 Organización:
 
-    1- CREAR UN COMPONENTE BLADE PARA EL Formulario (resources/views/disciplines/_form.blade.php)
+    1- CREAR UN COMPONENTE BLADE PARA EL Formulario (resources/views/components/form.blade.php)
 
         Incluye los campos del formulario, y usa variables para los valores y el modo crear/editar
 
@@ -135,6 +135,18 @@ Organización:
             ])
         @endsection
 
+app.blade.php es el layout base, define el HTML principal y home.blade.php extiende de este archivo. Lo que significa
+que el contenido de home se inserta en @yield(content) de app.blade.php
+
+El layout no se extiende a sí mismo; solo las vistas lo extienden.
+
+PUNTO DE ENTRADA - /
+    . se carga home.blade.php
+    . este home extiende layouts.app, y aparece en el content del layout.
+    //todos los archivos de vista tiene que extender el layout base.
+    //los componentes o fragmentos se inserta con @include
+
+
 SI QUEREMOS EL MISMO FORMULARIO PARA TODAS LAS SECCIONES:
 
     Investigando cómo podríamos hacer un formulario principal que fuera igual para todas las secciones al hacer
@@ -145,6 +157,9 @@ SI QUEREMOS EL MISMO FORMULARIO PARA TODAS LAS SECCIONES:
     Cada acción CRUD de cada seccion va a contener el mismo formulario. Por lo tanto, se incluirá la action con su ruta
     y un array fields que contendrá los valores declarados en el seeder en las claves, que se llamará en el form.
     Así se podrá construir un formulario según el $field['$key']
+
+    Hemos creado el componente form para el molde:
+
 
 
 */

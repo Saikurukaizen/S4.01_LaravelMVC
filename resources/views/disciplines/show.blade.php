@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fitbit | Disciplines</title>
+@include('components.nav')
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    {{-- iconos, logos, etc --}}
-    {{-- tipografía --}}
-</head>
-<body>
+<div class="max-w-lg mx-auto mt-8">
+    @include('components.form', [
+        'action' => route('disciplines.store'),
+        'fields' => [
+            [
+                'name' => 'name',
+                'label' => 'Name',
+                'type' => 'text',
+                'value' => $discipline->name
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'textarea',
+                'value' => $discipline->description
+            ],        
+        ],
+        'showButton' => false
+    ])
 
-    <a href="{{ route('disciplines.index') }}">Volver a la lista de disciplinas</a>
-    <h1>Disciplina: {{ $discipline->name }} </h1>
-    <p>Descripción: {{ $discipline->description }}</p>
-
-</body>
-</html>
+    <a href="{{ route('disciplines.index') }}" class="border-t-neutral-500">Return</a>
+</div>
