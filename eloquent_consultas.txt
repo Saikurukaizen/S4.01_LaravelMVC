@@ -41,3 +41,110 @@ Relaciones (ejemplo, obtener disciplina de un usuario):
 $user->discipline; // Si tienes la relación definida en el modelo
 
 COMENTARIO AL CREAR DEV
+
+SOBRE LOS CONTENIDOS DE LAS VISTAS: LAYOUT PRINCIPALES, VISTAS CONCRETAS Y OTRO ELEMENTOS:
+
+1- LAYOUT PRINCIPAL -> app.blade.php
+
+    Contiene la estructura base (header, menu, footer, etc)
+    Incluye los enlaces principales (Routes::get)
+    Usa @yield(content) para mostrar el contenido dinámico de cada vista.
+
+2- VISTA HOME (DASHBOARD) -> home.blade.php 
+
+    Es la ventana principal del admin
+    Muestra accesos a distintas secciones
+    Puede tener tarjetas, botones o menu lateral
+
+3- VISTA DISCIPLINES -> /disciplines/index.blade.php
+
+    index.blade.php
+
+        Lista todas las disciplinas
+        Cada disciplina tiene un enlace a su vista de detalle (show)
+        Botón/enlace para crear nueva disciplina(create)
+
+    create.blade.php
+
+        Formulario para crear una nueva disciplina
+
+/*
+DISCLAIMER
+
+Es buena idea crear un formulario principal reutilizable para cualquier entidad y luego usarlo en las
+vistas de create, edit y hasta en show.
+
+Organización:
+
+    1- CREAR UN COMPONENTE BLADE PARA EL Formulario (resources/views/disciplines/_form.blade.php)
+
+        Incluye los campos del formulario, y usa variables para los valores y el modo crear/editar
+
+        form method POST action="{{ $action }}"
+            @csrf
+            @If($method === "POST" || $method === 'PATCH')
+                @method($method)
+            @endif
+
+            labels/inputs
+
+        {{-- Aquí puedo mostrar botones según el contexto--}}
+        @if($showButton ?? true)
+            button type submit>{{ $buttonText == 'Guardar'}}
+        @endif
+        /form
+
+    2- Con esto, en create.blade.php:
+
+        @extends('layout.app) // Para llamar al layout principal
+
+        @section(content) // para llamar al contenido específico de la vista
+            h1 Crear disciplina
+            @include('disciplines._form', [ // incluir el formulario principal del componente Blade y que contendrá:
+                'action' => route('disciplines.store'),
+                'method' => 'POST',
+                'buttonText' => 'Crear'
+            ])
+        @endsection
+
+    3- Entonces, en edit.blade.php
+
+        @extends('layout.app)
+
+        @section(content)
+            h1 Editar disciplina
+            @include('disciplines._form', [
+                'action' => route('disciplines.update', $dicipline->id),
+                'method' => 'PUT',
+                'discipline' => $discipline,
+                'buttonText' => 'Actualizar'
+            ])
+        @endsection
+
+    4- El show.blade.php es opcional y de sólo lectura
+
+        @extends('layout.app)
+
+        @section(content)
+            h1 Ver disciplina
+            @include('disciplines._form', [
+                'discipline' => $discipline,
+                'action' => '#',
+                'method' => 'PUT',                
+                'showButton' => false
+            ])
+        @endsection
+
+SI QUEREMOS EL MISMO FORMULARIO PARA TODAS LAS SECCIONES:
+
+    Investigando cómo podríamos hacer un formulario principal que fuera igual para todas las secciones al hacer
+    los CRUDS, tendríamos que hacer un componente form.blade.php en el que:
+    declaramos variables $action y $method para la llamada dinámica de ambos, y un buvle que recorra una variable $field
+    Por qué una variable $field?
+
+    Cada acción CRUD de cada seccion va a contener el mismo formulario. Por lo tanto, se incluirá la action con su ruta
+    y un array fields que contendrá los valores declarados en el seeder en las claves, que se llamará en el form.
+    Así se podrá construir un formulario según el $field['$key']
+
+
+*/
