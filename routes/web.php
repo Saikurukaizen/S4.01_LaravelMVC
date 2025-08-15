@@ -50,6 +50,16 @@ Aquí no he introducido los slug por diferentes razones de arquitectura del soft
 
     3.- Si hubiera otras funcionalidades fuera de un CRUD, tales como foros, blogs u otros sistemas de rutas que
     amplíen el proyecto, he mantenido un trait HasSlug para no repetir lógica, para futuros cambios.
+
+    Solucion: Hashear las ids del URL usando UUID o instalando la librería vinkla/hashids:
+    Codifica y decodifica IDs en URLs, con una lógica muy similar a usar un base64encode/decode en el controlador.
+
+    En cuanto a UUIDs, se pueden utilizar para generar ids únicos que no revelen información sobre los registros de la db.
+    Se define un newUniqueId() en el modelo el trait que genera (use Ramsey\Uuid\Uuid;) que devuelve un string casteado a uuid.
+    Se define un método uniqueIds(): array para generar un array de ids únicos y lo devuelve:
+        return ['id', 'discount_code'];
+    Se puede usar tambien ULIDs que son similares a los UUIDs, pero están ordenados de forma lexicográfica.
+    UUID y ULID ambos son Traits para usar en los modelos.
 */
 
 /*
