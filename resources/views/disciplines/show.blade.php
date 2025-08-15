@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Fitbit | ' . $item->name)
+
 @section('content')
 <div class="max-w-lg mx-auto mt-8">
     @include('components.form', [

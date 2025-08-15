@@ -1,4 +1,8 @@
+@section('title', 'Fitbit | Disciplines')
+
 <x-app-layout>
+
+    
     @include('components.nav')
 
     <div class="overflow-x-auto">
