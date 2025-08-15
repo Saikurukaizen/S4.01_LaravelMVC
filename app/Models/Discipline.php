@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\Traits\HasDatetimeCasts;
-
+use App\Models\Traits\HasSlug;
 
 class Discipline extends Model
 {
@@ -17,7 +17,7 @@ class Discipline extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
 
     /*Esta función name() para asignar al campo name de la table Disciplines un

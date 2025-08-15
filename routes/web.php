@@ -12,6 +12,7 @@ use App\Models\Community;
 Route::get('/', function () { return view('home'); })->name('home');
 
 Route::resource('disciplines', DisciplineController::class);
+
 /*
 Podemos renombrar la Route Resource usando ->names() y cambiar los parametros de la uri con otro valor
 como por ejemplo ->parameters(['disciplines' => 'disc']).
@@ -23,6 +24,34 @@ Route::resource('disciplines', DisciplineController::class)
         ->except(['create', 'edit']);
 Tambien hay un Route::apiResource('disciplines', DisciplineController::class);
 */
+
+/*
+También podemos hacer un Route Model Binding, usando el Route::resource(). LLamando el modelo como argumento
+en los métodos en el controlador de cada categoría.
+
+Funciona en controladores hijos, pero no es compatible en controladores abstractos porque PHP no permite tipar
+los parámetros de los métodos de forma dinámica, como es en este caso.
+
+SOBRE EL ROUTE MODEL BINDING Y EL USO DE SLUG:
+
+Aquí no he introducido los slug por diferentes razones de arquitectura del software:
+    1.- Al haber declarado una clase abstracta, no puedo utilizar el Route Model Binding de forma directa. Ésta
+    acepta herencia, pero no acepta la abstracción. 
+    1B.- En el caso de que quisiera usar un Route Model Binding y URL's con slug, tendría que reescribir métodos en los
+    controladores hijos (como show(), edit(), update() y destroy()), pero implicaria modificar variables en las vistas, y
+    como no es dinámico, da problemas en el mutator para el dinamismo de atributos.
+    1C.- No hay problema en almacenarlos en la base de datos, usando $fillable y añadirlo al factory y al seeder. Pero
+    al devolver los datos, cambiaría la estructura de URLs, y no podría usar el binding.
+    1D. Implica que en la funcion validateData() del controlador hijo, tendría que validar el slug manualmente, como string. El
+    problema radica en que, al pasar por el mutator, el resultado es null, por mucho que modifiques la lógica de la misma.
+
+    2.- Quizás hubiera sido más sencillo no crear una clase abstracta para un CRUD y, manejando la lógica en cada
+    controlador, manejaría el Binding y sus slugs, sin complicaciones adicionales.
+
+    3.- Si hubiera otras funcionalidades fuera de un CRUD, tales como foros, blogs u otros sistemas de rutas que
+    amplíen el proyecto, he mantenido un trait HasSlug para no repetir lógica, para futuros cambios.
+*/
+
 /*
 Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
 Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');

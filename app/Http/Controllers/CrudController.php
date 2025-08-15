@@ -52,4 +52,6 @@ abstract class CrudController extends Controller{
         return redirect()->route("{$this->viewFolder}.index")
         ->with('success', 'Deleted successfully: ' . $item->name);
     }
+
+    abstract protected function validateData(Request $request);
 }
