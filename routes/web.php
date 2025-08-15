@@ -60,6 +60,11 @@ Aquí no he introducido los slug por diferentes razones de arquitectura del soft
         return ['id', 'discount_code'];
     Se puede usar tambien ULIDs que son similares a los UUIDs, pero están ordenados de forma lexicográfica.
     UUID y ULID ambos son Traits para usar en los modelos.
+
+    He valorado usar métodos nativos de PHP como base64_encode()/decode() para las IDs
+
+    Como lo que busco son identificadores únicos pero que no correspondan con las IDs originales, he decidido usar UUIDs para garantizar la seguridad y privacidad
+    de los datos, aunque pierda cierta legibilidad en las URLs y eficiencia en la base de datos. (Aunque eso afecta en grandes bases de datos)
 */
 
 /*
