@@ -1,21 +1,28 @@
-@include('components.form', [
-    'action' => route('disciplines.update', $item->id),
-    'method' => 'PUT',
-    'fields' => [
-        [
-            'name' => 'name',
-            'label' => 'Name',
-            'type' => 'text',
-            'value' => $item->name
-        ],
-        [
-            'name' => 'description',
-            'label' => 'Description',
-            'type' => 'textarea',
-            'value' => $item->description
-        ],        
-    ],
-    'buttonText' => 'Update'
-])
+@extends('layouts.app')
 
-<a href="{{ route('disciplines.index') }}" class="border-t-neutral-500">Cancel</a>
+@section('content')
+    <div class="max-w-lg mx-auto mt-8">
+        <h1>Edit this Discipline</h1>
+        <br>
+        @include('components.form', [
+            'action' => route('disciplines.update', $item->id),
+            'method' => 'PUT',
+            'fields' => [
+                [
+                'name' => 'name',
+                'label' => 'Name',
+                'type' => 'text',
+                'value' => $item->name
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'textarea',
+                'value' => $item->description
+            ],        
+        ],
+        'buttonText' => 'Update',
+        'cancelUrl' => route('disciplines.index')
+        ])
+    </div>
+@endsection

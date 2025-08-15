@@ -1,22 +1,23 @@
-@include('components.nav')
+@extends('layouts.app')
 
-<div class="max-w-lg mx-auto mt-8">
-    @include('components.form', [
-        'action' => route('disciplines.store'),
-        'fields' => [
-            [
-                'name' => 'name',
-                'label' => 'Name',
-                'type' => 'text',
+@section('content')
+    <div class="max-w-lg mx-auto mt-8">
+        @include('components.form', [
+            'action' => route('disciplines.store'),
+            'fields' => [
+                [
+                    'name' => 'name',
+                    'label' => 'Name',
+                    'type' => 'text',
+                ],
+                [
+                    'name' => 'description',
+                    'label' => 'Description',
+                    'type' => 'textarea'
+                ],        
             ],
-            [
-                'name' => 'description',
-                'label' => 'Description',
-                'type' => 'textarea'
-            ],        
-        ],
-        'buttonText' => 'Create Discipline'
-    ])
-
-    <a href="{{ route('disciplines.index') }}" class="border-t-neutral-500">Cancel</a>
-</div>
+            'buttonText' => 'Create Discipline',
+            'cancelUrl' => route('disciplines.index')
+        ])
+    </div>
+@endsection

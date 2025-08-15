@@ -16,7 +16,5 @@ class DisciplineController extends CrudController
             'name' => 'required|string|max:50',
             'description' => 'required|string|max:255',
         ]);
-    }
-
-    
+    }    
 }
