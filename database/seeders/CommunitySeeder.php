@@ -14,32 +14,29 @@ class CommunitySeeder extends Seeder
     public function run(): void
     {
         $community1 = new Community();
-
         $community1->fill([
             'name' => 'Tai-Chi Lovers',
             'description' => 'Un espacio para compartir y practicar Tai-Chi.',
-            'user_id' => 1,
-            'discipline_id' => 1
+            'user_id' => \App\Models\User::inRandomOrder()->first()?->id,
+            'discipline_id' => \App\Models\Discipline::inRandomOrder()->first()?->id
         ]);
         $community1->save();
 
         $community2 = new Community();
-
         $community2->fill([
             'name' => 'Pega Pega',
             'description' => 'Grupo de boxeo',
-            'user_id' => 1,
-            'discipline_id' => 2
+            'user_id' => \App\Models\User::inRandomOrder()->first()?->id,
+            'discipline_id' => \App\Models\Discipline::inRandomOrder()->first()?->id
         ]);
         $community2->save();
 
         $community3 = new Community();
-
         $community3->fill([
             'name' => 'Los Gymbros',
             'description' => 'Comunidad para amantes del culturismo',
-            'user_id' => 2,
-            'discipline_id' => 3
+            'user_id' => \App\Models\User::inRandomOrder()->first()?->id,
+            'discipline_id' => \App\Models\Discipline::inRandomOrder()->first()?->id
         ]);
         $community3->save();
 

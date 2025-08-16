@@ -9,17 +9,86 @@ use App\Models\User;
 use App\Models\Discipline;
 use App\Models\Community;
 
-Route::get('/', HomeController::class);
+Route::get('/', function () { return view('home'); })->name('home');
 
-Route::get('/users', [UserController::class, 'index']);
+Route::resource('disciplines', DisciplineController::class);
+
+/*
+Podemos renombrar la Route Resource usando ->names() y cambiar los parametros de la uri con otro valor
+como por ejemplo ->parameters(['disciplines' => 'disc']).
+El problema es que, nosotros, al crear una clase abstracta, en el que se ha de especificar exactamente el nombre
+de la ruta, no podemos utilizar el nombre corto.
+
+EN UNA API, NO VA A EXISTIR VISTAS Y, POR LO TANTO, NO VA A EXISTIR NI CREATE NI EDIT. Simplemente usaremos:
+Route::resource('disciplines', DisciplineController::class)
+        ->except(['create', 'edit']);
+Tambien hay un Route::apiResource('disciplines', DisciplineController::class);
+*/
+
+/*
+También podemos hacer un Route Model Binding, usando el Route::resource(). LLamando el modelo como argumento
+en los métodos en el controlador de cada categoría.
+
+Funciona en controladores hijos, pero no es compatible en controladores abstractos porque PHP no permite tipar
+los parámetros de los métodos de forma dinámica, como es en este caso.
+
+SOBRE EL ROUTE MODEL BINDING Y EL USO DE SLUG:
+
+Aquí no he introducido los slug por diferentes razones de arquitectura del software:
+    1.- Al haber declarado una clase abstracta, no puedo utilizar el Route Model Binding de forma directa. Ésta
+    acepta herencia, pero no acepta la abstracción. 
+    1B.- En el caso de que quisiera usar un Route Model Binding y URL's con slug, tendría que reescribir métodos en los
+    controladores hijos (como show(), edit(), update() y destroy()), pero implicaria modificar variables en las vistas, y
+    como no es dinámico, da problemas en el mutator para el dinamismo de atributos.
+    1C.- No hay problema en almacenarlos en la base de datos, usando $fillable y añadirlo al factory y al seeder. Pero
+    al devolver los datos, cambiaría la estructura de URLs, y no podría usar el binding.
+    1D. Implica que en la funcion validateData() del controlador hijo, tendría que validar el slug manualmente, como string. El
+    problema radica en que, al pasar por el mutator, el resultado es null, por mucho que modifiques la lógica de la misma.
+
+    2.- Quizás hubiera sido más sencillo no crear una clase abstracta para un CRUD y, manejando la lógica en cada
+    controlador, manejaría el Binding y sus slugs, sin complicaciones adicionales.
+
+    3.- Si hubiera otras funcionalidades fuera de un CRUD, tales como foros, blogs u otros sistemas de rutas que
+    amplíen el proyecto, he mantenido un trait HasSlug para no repetir lógica, para futuros cambios.
+
+    Solucion: Hashear las ids del URL usando UUID o instalando la librería vinkla/hashids:
+    Codifica y decodifica IDs en URLs, con una lógica muy similar a usar un base64encode/decode en el controlador.
+
+    En cuanto a UUIDs, se pueden utilizar para generar ids únicos que no revelen información sobre los registros de la db.
+    Se define un newUniqueId() en el modelo el trait que genera (use Ramsey\Uuid\Uuid;) que devuelve un string casteado a uuid.
+    Se define un método uniqueIds(): array para generar un array de ids únicos y lo devuelve:
+        return ['id', 'discount_code'];
+    Se puede usar tambien ULIDs que son similares a los UUIDs, pero están ordenados de forma lexicográfica.
+    UUID y ULID ambos son Traits para usar en los modelos.
+
+    He valorado usar métodos nativos de PHP como base64_encode()/decode() para las IDs
+
+    Como lo que busco son identificadores únicos pero que no correspondan con las IDs originales, he decidido usar UUIDs para garantizar la seguridad y privacidad
+    de los datos, aunque pierda cierta legibilidad en las URLs y eficiencia en la base de datos. (Aunque eso afecta en grandes bases de datos)
+
+    SOBRE TEMAS DE VALIDACION
+
+    Al crear una clase abstracta con todos los métodos CRUD, no puedo usar el Route Model Binding de forma directa y, por lo tanto, da más problemas
+    al crear Request. Como la validacion de store() y update() está englobado en el método rules() del Request, de forma global por la abstracción,
+    no puedo acceder a los parámetros de la ruta de forma sencilla. Una forma es hacer rules() por cada método. Pero he optado por hacer la validación de
+    los Requests manualmente. De esta manera respetamos la abstracción y cada categoría lo implementará a su manera.
+
+*/
+
+/*
+Route::get('/disciplines', [DisciplineController::class, 'index'])->name('disciplines.index');
+Route::get('/disciplines/create', [DisciplineController::class, 'create'])->name('disciplines.create');
+Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
+Route::get('/disciplines/{id}/edit', [DisciplineController::class, 'edit'])->name('disciplines.edit');
+Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disciplines.store');
+Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
+Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
+*/
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/create', [UserController::class, 'create']);
 Route::get('/users/{id}', [UserController::class, 'show']);
 
-Route::get('/disciplines', [DisciplineController::class, 'index']);
-Route::get('/disciplines/create', [DisciplineController::class, 'create']);
-Route::get('/disciplines/{id}', [DisciplineController::class, 'show'])->name('disciplines.show');
-
-Route::get('/communities', [CommunityController::class, 'index']);
+Route::get('/communities', [CommunityController::class, 'index'])->name('communities.index');
 Route::get('/communities/create', [CommunityController::class, 'create']);
 Route::get('/communities/{id}', [CommunityController::class, 'show']);
 

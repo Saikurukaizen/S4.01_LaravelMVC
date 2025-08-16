@@ -7,17 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\Traits\HasDatetimeCasts;
-
+use App\Models\Traits\HasSlug;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Discipline extends Model
 {
     use HasFactory;
+    use HasUuids;
 
     protected $table = 'disciplines';
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
 
     /*Esta función name() para asignar al campo name de la table Disciplines un

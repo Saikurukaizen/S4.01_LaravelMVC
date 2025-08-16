@@ -1,16 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fitbit | Disciplines</title>
+@extends('layouts.app')
 
-    {{-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> --}}
-    {{-- iconos, logos, etc --}}
-    {{-- tipografía --}}
-</head>
-<body>
-    <h1>Aquí se mostrarán la disciplina: {{ $discipline }} </h1>
-</body>
-</html>
+@section('title', 'Fitbit | ' . $item->name)
+
+@section('content')
+<div class="max-w-lg mx-auto mt-8">
+    @include('components.form', [
+        'action' => '#',
+        'fields' => [
+            [
+                'name' => 'name',
+                'label' => 'Name',
+                'type' => 'text',
+                'value' => $item->name
+            ],
+            [
+                'name' => 'description',
+                'label' => 'Description',
+                'type' => 'textarea',
+                'value' => $item->description
+            ],        
+        ],
+        'showButton' => false
+    ])
+    <div class="flex gap-2 mt-4">
+        <form action="{{ route('disciplines.edit', $item->id) }}" method="GET">
+            <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded">Edit</button>
+        </form>
+        <form action="{{ route('disciplines.destroy', $item->id) }}" method="POST" onsubmit="return confirm('¿Are you sure you want to delete this discipline?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+        </form>
+        
+        <form action="{{ route('disciplines.index') }}" method="GET">
+            <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+        </form>
+    </div>
+    </div>
+@endsection

@@ -17,7 +17,7 @@ class DisciplineSeeder extends Seeder
 
         $discipline1->fill([
             'name' => 'Tai-Chi',
-            'description' => 'Combina movimientos del kung-fu con técnicas de respiración y meditación.'
+            'description' => 'Combina movimientos del kung-fu con técnicas de respiración y meditación.',
         ]);
         $discipline1->save();
 
@@ -25,7 +25,7 @@ class DisciplineSeeder extends Seeder
 
         $discipline2->fill([
             'name' => 'Boxeo',
-            'description' => 'Deporte de combate que consiste en golpear con los puños.'
+            'description' => 'Deporte de combate que consiste en golpear con los puños.',
         ]);
         $discipline2->save();
 
@@ -33,7 +33,7 @@ class DisciplineSeeder extends Seeder
 
         $discipline3->fill([
             'name' => 'Bodybuilder',
-            'description' => 'Entrenamiento de fuerza para desarrollar la musculatura.'
+            'description' => 'Entrenamiento de fuerza para desarrollar la musculatura.',
         ]);
         $discipline3->save();
 

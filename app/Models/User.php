@@ -7,11 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Traits\HasDatetimeCasts;
-
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use HasUuids;
 
     protected $fillable = [
         'name',

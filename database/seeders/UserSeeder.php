@@ -13,14 +13,14 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-       $user = new User();
+        $user = new User();
         $user->name = 'Admin';
         $user->lastname = 'Admin';
         $user->date_of_birth = '2000-08-11'; // Añade una fecha válida
         $user->email = 'admin@admin.com';
         $user->password = bcrypt('1234');
         $user->bank_acc = 'ES123456';
-        $user->discipline_id = 1;
+        $user->discipline_id = \App\Models\Discipline::first()->id;
 
         $user->save();
 
