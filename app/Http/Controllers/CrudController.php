@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DisciplineRequest;
 use Illuminate\Http\Request;
 
 abstract class CrudController extends Controller{

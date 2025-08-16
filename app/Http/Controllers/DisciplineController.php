@@ -13,7 +13,7 @@ class DisciplineController extends CrudController
 
     protected function validateData(Request $request){
         return $request->validate([
-            'name' => 'required|string|max:50',
+            'name' => 'required|string|max:50|unique:disciplines,name,' . $request->route('discipline') . ',id',
             'description' => 'required|string|max:255',
         ]);
     }    

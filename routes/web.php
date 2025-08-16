@@ -65,6 +65,14 @@ Aquí no he introducido los slug por diferentes razones de arquitectura del soft
 
     Como lo que busco son identificadores únicos pero que no correspondan con las IDs originales, he decidido usar UUIDs para garantizar la seguridad y privacidad
     de los datos, aunque pierda cierta legibilidad en las URLs y eficiencia en la base de datos. (Aunque eso afecta en grandes bases de datos)
+
+    SOBRE TEMAS DE VALIDACION
+
+    Al crear una clase abstracta con todos los métodos CRUD, no puedo usar el Route Model Binding de forma directa y, por lo tanto, da más problemas
+    al crear Request. Como la validacion de store() y update() está englobado en el método rules() del Request, de forma global por la abstracción,
+    no puedo acceder a los parámetros de la ruta de forma sencilla. Una forma es hacer rules() por cada método. Pero he optado por hacer la validación de
+    los Requests manualmente. De esta manera respetamos la abstracción y cada categoría lo implementará a su manera.
+
 */
 
 /*
