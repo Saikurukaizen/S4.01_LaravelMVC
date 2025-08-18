@@ -13,6 +13,14 @@ Route::get('/', function () { return view('home'); })->name('home');
 
 Route::resource('disciplines', DisciplineController::class);
 
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
 /*
 Podemos renombrar la Route Resource usando ->names() y cambiar los parametros de la uri con otro valor
 como por ejemplo ->parameters(['disciplines' => 'disc']).
@@ -84,9 +92,7 @@ Route::post('/disciplines', [DisciplineController::class, 'store'])->name('disci
 Route::put('/disciplines/{id}', [DisciplineController::class, 'update'])->name('disciplines.update');
 Route::delete('/disciplines/{id}', [DisciplineController::class, 'destroy'])->name('disciplines.destroy');
 */
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/create', [UserController::class, 'create']);
-Route::get('/users/{id}', [UserController::class, 'show']);
+
 
 Route::get('/communities', [CommunityController::class, 'index'])->name('communities.index');
 Route::get('/communities/create', [CommunityController::class, 'create']);

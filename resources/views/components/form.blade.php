@@ -11,6 +11,13 @@
 
             @if($field['type'] === 'textarea')
                 <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">{{ old($field['name'], $field['value'] ?? '') }}</textarea>
+            @elseif($field['type'] === 'select')
+                <select name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <option value="">Select {{ $field['label'] }}</option>
+                    @foreach($field['options'] as $value => $label)
+                        <option value="{{ $value }}" {{ old($field['name']) == $value ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
             @else
                 <input type="{{ $field['type'] }}" name="{{ $field['name'] }}" id="{{ $field['name'] }}" value="{{ old($field['name'], $field['value'] ?? '') }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
             @endif

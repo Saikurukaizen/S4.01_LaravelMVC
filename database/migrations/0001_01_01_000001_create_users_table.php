@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->id();
             $table->string('name');
             $table->string('lastname');
             $table->date('date_of_birth');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('bank_acc')->unique();
             $table->timestamps();
-            $table->uuid('discipline_id');
+            $table->unsignedBigInteger('discipline_id');
             $table->foreign('discipline_id')->references('id')->on('disciplines')->onDelete('cascade');
             
         });

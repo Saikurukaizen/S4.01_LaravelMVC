@@ -6,14 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-use App\Models\Traits\HasDatetimeCasts;
-use App\Models\Traits\HasSlug;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Discipline extends Model
 {
     use HasFactory;
-    use HasUuids;
 
     protected $table = 'disciplines';
 

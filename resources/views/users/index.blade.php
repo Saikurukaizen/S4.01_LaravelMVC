@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fitbit | Lista de Usuarios</title>
-</head>
-<body>
-    <h1>Lista de usuarios</h1>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('title', 'Fitbit | Users')
+
+@section('content')
+    @include('components.table-list', [
+        'title' => 'Users List',
+        'headers' => ['Name', '', 'Actions'],
+        'rows' => $items,
+        'actions' => [
+            'show' => fn($item) => route('users.show', $item->id),
+            'edit' => fn($item) => route('users.edit', $item->id),
+        ],
+        'createRoute' => route('users.create'),
+        'createText' => 'Create User'
+    ])
+
+    <div class="mt-4">
+        {{ $items->links() }}
+    </div>
+@endsection
