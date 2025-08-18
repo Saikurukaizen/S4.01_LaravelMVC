@@ -20,11 +20,8 @@ class DisciplineRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    /* {
-    $id = $this->id ?? ($this->all()['id'] ?? '');
-        return [
-            'name' => 'required|string|max:50|unique:disciplines,name' . ($id ? ',' . $id . ',id' : ''),
-            'description' => 'required|string|max:255',
-        ];
-    } */
+    {
+        // Add your validation rules here
+        return [];
+    }
 }
