@@ -34,4 +34,10 @@ class UserController extends CrudController
     $discipline = \App\Models\Discipline::find($item->discipline_id);
     return view("{$this->viewFolder}.show", compact('item', 'discipline'));
     }
+
+    public function edit($id) {
+        $item = User::findOrFail($id);
+        $discipline = \App\Models\Discipline::find($item->discipline_id);
+        return view("{$this->viewFolder}.update", compact('item', 'discipline'));
+    }
 }
