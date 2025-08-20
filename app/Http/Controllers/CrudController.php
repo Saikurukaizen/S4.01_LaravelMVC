@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DisciplineRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 abstract class CrudController extends Controller{
@@ -19,7 +20,7 @@ abstract class CrudController extends Controller{
         return view("{$this->viewFolder}.create");
     }
 
-    public function store(Request $request){
+    public function store(Request $request): RedirectResponse{
         $validated = $this->validateData($request);
         $item = $this->model::create($validated);
 
@@ -37,9 +38,10 @@ abstract class CrudController extends Controller{
         return view("{$this->viewFolder}.update", compact('item'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id): RedirectResponse{
         $validated = $this->validateData($request);
         $item = $this->model::findOrFail($id);
+
         $item->update($validated);
 
         return redirect()->route("{$this->viewFolder}.index")

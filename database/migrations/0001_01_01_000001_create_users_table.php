@@ -18,10 +18,12 @@ return new class extends Migration
             $table->date('date_of_birth');
             $table->string('email')->unique();
             $table->string('password');
+            $table->rememberToken();
             $table->string('bank_acc')->unique();
             $table->timestamps();
             $table->unsignedBigInteger('discipline_id');
             $table->foreign('discipline_id')->references('id')->on('disciplines')->onDelete('cascade');
+            
             
         });
     }

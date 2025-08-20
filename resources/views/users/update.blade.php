@@ -42,7 +42,7 @@
                 ],
                 [
                     'name' => 'new_password',
-                    'label' => 'New password',
+                    'label' => 'New password (optional)',
                     'type' => 'password',
                 ],
                 [
@@ -59,9 +59,10 @@
                 [
                     'name' => 'discipline_id',
                     'label' => 'Discipline',
-                    'type' => 'text',
-                    'value' => $discipline->name,
-                ],    
+                    'type' => 'select',
+                    'options' => $disciplines,
+                    'selected' => $item->discipline_id,
+                ],
             ],
         'buttonText' => 'Update',
         'cancelUrl' => route('users.index')

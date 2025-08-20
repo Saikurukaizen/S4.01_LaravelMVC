@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class UserController extends CrudController
@@ -12,21 +13,29 @@ class UserController extends CrudController
     protected $viewFolder = 'users';
 
     protected function validateData(Request $request){
-        return $request->validate([
-            'name' => 'required|string|max:50|unique:users.name,' . $request->route('user') . ',id',
-            'lastname' => 'required|string|max:100',
-            'date_of_birth' => 'required|date',
-            'email' => 'required|email|max:100|unique:users.email,' . $request->route('user') . ',id',
-            'password' => 'required|string|min:8|confirmed',
-            'bank_acc' => 'required|string|max:20|unique:users.bank_acc,' . $request->route('user') . ',id',
-            'discipline_id' =>'required|exists:disciplines.id',
-        ]);
+
+        $userId = $request->route('user') ?? $request->route()->parameter('id') ?? null;
+        $rules = [
+            'name' => 'sometimes|string|max:50|' . ($userId ? 'unique:users,name,' . $userId . ',id' : '|unique:users,name'),
+            'lastname' => 'sometimes|string|max:100',
+            'date_of_birth' => 'sometimes|date',
+            'email' => 'sometimes|email|max:100|' . ($userId ? 'unique:users,email,' . $userId . ',id' : '|unique:users,email'),
+            //'password' => ($userId ? 'nullable' : 'required'),
+            'bank_acc' => 'sometimes|string|max:20|' . ($userId ? 'unique:users,bank_acc,' . $userId . ',id' : '|unique:users,bank_acc'),
+            'discipline_id' =>'sometimes|exists:disciplines,id',
+        ];
+
+        if($request->password && $request->password_confirmation){
+            $rules['password'] = 'string|min:8|confirmed';
+        }
+
+        return $request->validate($rules);
     }
 
     public function create(){
         $users = User::pluck('name', 'id')->toArray();
         $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
-        return view("{$this->viewFolder}.create", compact('disciplines'));
+        return view("{$this->viewFolder}.create", compact('disciplines', 'users'));
     }
 
     public function show($id) {
@@ -37,7 +46,24 @@ class UserController extends CrudController
 
     public function edit($id) {
         $item = User::findOrFail($id);
-        $discipline = \App\Models\Discipline::find($item->discipline_id);
-        return view("{$this->viewFolder}.update", compact('item', 'discipline'));
+        $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
+
+        return view("{$this->viewFolder}.update", compact('item', 'disciplines'));
     }
+
+   /*  public function update(Request $request, $id): RedirectResponse{
+        $validated = $this->validateData($request);
+        $item = User::findOrFail($id);
+
+        if(!$request->filled('password')){
+            unset($validated['password']);
+        } else {
+            $validated['password'] = bcrypt($validated['password']);
+        }
+
+        $item->update($validated);
+
+        return redirect()->route("{$this->viewFolder}.index")
+            ->with('success', 'Updated successfully: ' . $item->name);
+    } */
 }

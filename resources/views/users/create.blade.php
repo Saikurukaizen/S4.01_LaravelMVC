@@ -34,7 +34,7 @@
                     'type' => 'password',
                 ],
                 [
-                    'name' => 'password_confirm',
+                    'name' => 'password_confirmation',
                     'label' => 'Confirm Password',
                     'type' => 'password',
                 ],

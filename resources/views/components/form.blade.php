@@ -7,15 +7,26 @@
 
     @foreach($fields as $field)
         <div class="mb-4">
-            <label for="{{ $field['name'] }}" class="block font-semibold mb-1">{{ $field['label'] }}</label>
+            <label for="{{ $field['name'] }}" class="block font-semibold mb-1">
+                {{ $field['label'] }}
+            </label>
 
             @if($field['type'] === 'textarea')
-                <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">{{ old($field['name'], $field['value'] ?? '') }}</textarea>
+                <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}"
+                    class="w-full border border-gray-300 rounded p-2
+                    focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    {{ old($field['name'], $field['value'] ?? '') }}
+                </textarea>
             @elseif($field['type'] === 'select')
-                <select name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <select name="{{ $field['name'] }}" id="{{ $field['name'] }}"
+                class="w-full border border-gray-300 rounded p-2
+                focus:outline-none focus:ring-2 focus:ring-blue-400">
                     <option value="">Select {{ $field['label'] }}</option>
                     @foreach($field['options'] as $value => $label)
-                        <option value="{{ $value }}" {{ old($field['name']) == $value ? 'selected' : '' }}>{{ $label }}</option>
+                        <option value="{{ $value }}"
+                            {{ (old($field['name'], $field['selected'] ?? $field['value'] ?? '') == $value) ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
                     @endforeach
                 </select>
             @else
