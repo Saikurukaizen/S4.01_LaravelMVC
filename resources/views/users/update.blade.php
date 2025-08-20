@@ -39,6 +39,7 @@
                     'label' => 'Current Password',
                     'type' => 'password',
                     'value' => $item->password,
+                    'readonly' => true,
                 ],
                 [
                     'name' => 'new_password',

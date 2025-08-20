@@ -16,11 +16,11 @@ class UserController extends CrudController
 
         $userId = $request->route('user') ?? $request->route()->parameter('id') ?? null;
         $rules = [
-            'name' => 'sometimes|string|max:50|' . ($userId ? 'unique:users,name,' . $userId . ',id' : '|unique:users,name'),
+            'name' => 'sometimes|string|max:50|' . ($userId ? 'unique:users,name,' . $userId . ',id' : 'unique:users,name'),
             'lastname' => 'sometimes|string|max:100',
             'date_of_birth' => 'sometimes|date',
-            'email' => 'sometimes|email|max:100|' . ($userId ? 'unique:users,email,' . $userId . ',id' : '|unique:users,email'),
-            'bank_acc' => 'sometimes|string|max:20|' . ($userId ? 'unique:users,bank_acc,' . $userId . ',id' : '|unique:users,bank_acc'),
+            'email' => 'sometimes|email|max:100|' . ($userId ? 'unique:users,email,' . $userId . ',id' : 'unique:users,email'),
+            'bank_acc' => 'sometimes|string|max:20|' . ($userId ? 'unique:users,bank_acc,' . $userId . ',id' : 'unique:users,bank_acc'),
             'discipline_id' =>'sometimes|exists:disciplines,id',
         ];
 
@@ -32,7 +32,6 @@ class UserController extends CrudController
     }
 
     public function create(){
-        $users = User::pluck('name', 'id')->toArray();
         $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
         return view("{$this->viewFolder}.create", compact('disciplines', 'users'));
     }

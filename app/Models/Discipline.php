@@ -18,10 +18,6 @@ class Discipline extends Model
         'description',
     ];
 
-    /*Esta función name() para asignar al campo name de la table Disciplines un
-    atributo. Este atributo hará que se modifiquen los valores del campo antes de almacenarlos.
-    En este caso, estamos pasando toda la cadena de texto a minusculas.
-    */
     protected function name(): Attribute{
         return Attribute::make(
             get: fn(string $value) => ucfirst($value),
