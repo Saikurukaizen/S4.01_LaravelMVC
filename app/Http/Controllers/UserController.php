@@ -20,7 +20,6 @@ class UserController extends CrudController
             'lastname' => 'sometimes|string|max:100',
             'date_of_birth' => 'sometimes|date',
             'email' => 'sometimes|email|max:100|' . ($userId ? 'unique:users,email,' . $userId . ',id' : '|unique:users,email'),
-            //'password' => ($userId ? 'nullable' : 'required'),
             'bank_acc' => 'sometimes|string|max:20|' . ($userId ? 'unique:users,bank_acc,' . $userId . ',id' : '|unique:users,bank_acc'),
             'discipline_id' =>'sometimes|exists:disciplines,id',
         ];
@@ -50,20 +49,4 @@ class UserController extends CrudController
 
         return view("{$this->viewFolder}.update", compact('item', 'disciplines'));
     }
-
-   /*  public function update(Request $request, $id): RedirectResponse{
-        $validated = $this->validateData($request);
-        $item = User::findOrFail($id);
-
-        if(!$request->filled('password')){
-            unset($validated['password']);
-        } else {
-            $validated['password'] = bcrypt($validated['password']);
-        }
-
-        $item->update($validated);
-
-        return redirect()->route("{$this->viewFolder}.index")
-            ->with('success', 'Updated successfully: ' . $item->name);
-    } */
 }
