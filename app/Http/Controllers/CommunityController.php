@@ -14,12 +14,20 @@ class CommunityController extends CrudController
     protected $viewFolder = 'communities';
 
     protected function validateData(Request $request){
-        return $request->validate([
-            'name' => 'required|string|max:50|unique:communities,name,' . $request->route('community') . ',id',
+
+        $communityId = $request->route('community') ?? $request->route()->parameter('id') ?? null;
+
+        $rules = [
             'description' => 'required|string|max:255',
-            'discipline_id' => 'required|exists:disciplines,id',
             'user_id' => 'required|exists:users,id',
-        ]);
+        ];
+
+        if(!$communityId){
+            $rules['name'] = 'required|string|max:50|unique:communities,name';
+            $rules['discipline_id'] = 'required|exists:disciplines,id';
+        }
+
+        return $request->validate($rules);
     } 
 
     public function create(){
@@ -31,5 +39,12 @@ class CommunityController extends CrudController
     public function show($id) {
     $item = Community::with('user', 'discipline')->findOrFail($id);
     return view("{$this->viewFolder}.show", compact('item'));
+    }
+
+    public function edit($id){
+        $users = User::pluck('name', 'id')->toArray();
+        $disciplines = Discipline::pluck('name', 'id')->toArray();
+        $item = Community::with('discipline', 'user')->findOrFail($id);
+        return view("{$this->viewFolder}.update", compact('item', 'users', 'disciplines'));
     }
 }
