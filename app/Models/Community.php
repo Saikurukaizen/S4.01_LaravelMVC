@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,4 +19,19 @@ class Community extends Model
         'user_id',
         'discipline_id'
     ];
+
+    protected function name(): Attribute{
+        return Attribute::make(
+            get: fn(string $value) => ucfirst($value),
+            set: fn(string $value) => ucfirst(strtolower($value)),
+        );
+    }
+
+    public function discipline(){
+        return $this->belongsTo(Discipline::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
