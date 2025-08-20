@@ -21,7 +21,7 @@ class UserController extends CrudController
             'date_of_birth' => 'sometimes|date',
             'email' => 'sometimes|email|max:100|' . ($userId ? 'unique:users,email,' . $userId . ',id' : 'unique:users,email'),
             'bank_acc' => 'sometimes|string|max:20|' . ($userId ? 'unique:users,bank_acc,' . $userId . ',id' : 'unique:users,bank_acc'),
-            'discipline_id' =>'sometimes|exists:disciplines,id',
+            'discipline_id' =>'required|exists:disciplines,id',
         ];
 
         if($request->password && $request->password_confirmation){
@@ -33,7 +33,7 @@ class UserController extends CrudController
 
     public function create(){
         $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
-        return view("{$this->viewFolder}.create", compact('disciplines', 'users'));
+        return view("{$this->viewFolder}.create", compact('disciplines'));
     }
 
     public function show($id) {
