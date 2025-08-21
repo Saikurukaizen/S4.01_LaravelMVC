@@ -11,13 +11,15 @@
                     'name' => 'name',
                     'label' => 'Name',
                     'type' => 'text',
-                    'value' => $item->name
+                    'value' => $item->name,
+                    'readonly' => true,
                 ],
                 [
                     'name' => 'description',
                     'label' => 'Description',
                     'type' => 'textarea',
-                    'value' => $item->description
+                    'value' => $item->description,
+                    'readonly' => true,
                 ],
                 [
                     'name' => 'discipline_id',
