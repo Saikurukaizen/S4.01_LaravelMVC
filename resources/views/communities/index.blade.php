@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Fitbit | Lista de Comunidades</title>
-</head>
-<body>
-    <h1>Lista de comunidades</h1>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('title', 'Fitbit | Communities')
+
+@section('content')
+    @include('components.table-list', [
+        'title' => 'Communities List',
+        'headers' => ['Name', 'Description', 'Actions'],
+        'rows' => $items,
+        'actions' => [
+            'show' => fn($item) => route('communities.show', $item->id),
+            'edit' => fn($item) => route('communities.edit', $item->id),
+        ],
+        'createRoute' => route('communities.create'),
+        'createText' => 'Create a Community'
+    ])
+
+    <div class="mt-4">
+        {{ $items->links() }}
+    </div>
+@endsection

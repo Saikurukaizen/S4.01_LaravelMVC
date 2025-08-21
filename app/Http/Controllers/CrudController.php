@@ -13,6 +13,7 @@ abstract class CrudController extends Controller{
 
     public function index(){
         $items = $this->model::paginate(10);
+        //dd($items);
         return view("{$this->viewFolder}.index", compact('items'));
     }
 

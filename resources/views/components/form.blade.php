@@ -13,8 +13,10 @@
                 <textarea name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">{{ old($field['name'], $field['value'] ?? '') }}</textarea>
             @elseif($field['type'] === 'select')
                 <select name="{{ $field['name'] }}" id="{{ $field['name'] }}" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                @if(!isset($field['selected']) || $field['selected'] == '')
                     <option value="">Select {{ $field['label'] }}</option>
-                    @foreach($field['options'] as $value => $label)
+                @endif
+                @foreach($field['options'] as $value => $label)
                         <option value="{{ $value }}" 
                             {{ (old($field['name'], $field['selected'] ?? $field['value'] ?? '') == $value) ? 'selected' : '' }}>
                             {{ $label }}

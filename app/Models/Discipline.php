@@ -16,6 +16,8 @@ class Discipline extends Model
     protected $fillable = [
         'name',
         'description',
+        'discipline_id',
+        'user_id',
     ];
 
     protected function name(): Attribute{
