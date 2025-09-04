@@ -11,9 +11,9 @@ abstract class CrudController extends Controller{
     protected $model;
     protected $viewFolder;
 
-    public function __construct(){
+    /* public function __construct(){
         $this->middleware(['auth']);
-    }
+    } */
 
     public function index(){
         $items = $this->model::paginate(10);

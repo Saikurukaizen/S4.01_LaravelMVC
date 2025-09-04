@@ -18,6 +18,8 @@
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
+            @include('components.nav')
+
             <!-- Page Heading -->
             @isset($header)
                 <header class="bg-white shadow">
