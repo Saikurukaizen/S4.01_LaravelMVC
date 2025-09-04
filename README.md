@@ -126,5 +126,7 @@ fitbit/
 6. Loggeate para probar el CRUD:
     - Mail: admin@admin.com
     - Password: 1234
+  
+Para más info sobre el proceso y mis dudas que he tenido por el camino, ver el -md de apuntes
 
 ---
