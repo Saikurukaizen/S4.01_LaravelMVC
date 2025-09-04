@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DisciplineRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,9 +11,12 @@ abstract class CrudController extends Controller{
     protected $model;
     protected $viewFolder;
 
+    /* public function __construct(){
+        $this->middleware(['auth']);
+    } */
+
     public function index(){
         $items = $this->model::paginate(10);
-        //dd($items);
         return view("{$this->viewFolder}.index", compact('items'));
     }
 

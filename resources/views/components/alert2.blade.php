@@ -3,22 +3,22 @@
 @php
     switch($type){
         case 'info':       
-            $class = 'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400';
+            $class = 'text-blue-800 bg-blue-50';
         break;
         case 'danger':
-            $class = 'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400';
+            $class = 'text-red-800 bg-red-50';
         break;
         case 'success':
-            $class = 'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400';
+            $class = 'text-green-800 bg-green-50';
         break;
         case 'warning':
-            $class = 'text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300';
+            $class = 'text-yellow-800 rounded-lg bg-yellow-50';
         break;
         case 'dark':
-            $class = 'text-gray-800 bg-gray-50 dark:bg-gray-800 dark:text-gray-300';
+            $class = 'text-gray-800 bg-gray-50';
         break;
         default:
-            $class = 'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400';
+            $class = 'text-blue-800 bg-blue-50';
         break;
     }
 @endphp

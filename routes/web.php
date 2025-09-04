@@ -1,29 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\CommunityController;
-use App\Models\User;
-use App\Models\Discipline;
-use App\Models\Community;
+use App\Http\Controllers\DisciplineController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () { return view('home'); })->name('home');
+Route::get('/', function(){
+    return view('home');
+})->name('home');
 
-Route::resource('disciplines', DisciplineController::class);
-Route::resource('users', UserController::class);
-
-Route::get('/communities', [CommunityController::class, 'index'])->name('communities.index');
-Route::get('/communities/create', [CommunityController::class, 'create'])->name('communities.create');
-Route::get('/communities/{id}', [CommunityController::class, 'show'])->name('communities.show');
-Route::get('/communities/{id}/edit', [CommunityController::class, 'edit'])->name('communities.edit');
-Route::post('/communities', [CommunityController::class, 'store'])->name('communities.store');
-Route::put('/communities/{id}', [CommunityController::class, 'update'])->name('communities.update');
-Route::delete('/communities/{id}', [CommunityController::class, 'destroy'])->name('communities.destroy');
-
-Route::get('prueba', function(){
+Route::get('/dashboard', function(){
+    return redirect()->route('home');
+})->middleware(['auth'])->name('dashboard');
 
 
+Route::middleware('auth')->group(function() {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('disciplines', DisciplineController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('communities', CommunityController::class);
 });
-?>
+require __DIR__.'/auth.php';

@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title', 'Fitbit')</title>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="//unpkg.com/alpinejs" defer></script>
-    {{-- iconos, logos, etc --}}
-    {{-- tipografía --}}
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @stack('css')
-</head>
-<body class="bg-gradient-to-r from-blue-100 to-fuchsia-100">
-    <div class="container mx-auto px-4 pb-6 ">
-        <img src="{{ asset('images/banner.jpg') }}" alt="Banner" class="w-full h-48 object-cover mb-4">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        @include('components.nav')
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
 
-        <br>
+            @include('components.nav')
 
-        @if(session('success') && !request()->routeIs('home'))
-            <x-alert2 type="success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 mb-4 rounded ">
-                <x-slot name="titulo">
-                    ¡Éxito!
-                </x-slot>
-                {{ session('success') }}
-            </x-alert2>
-        @endif
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
 
-        @yield('content')
-
-        <footer class="mt-8"></footer>
-    </div>
-    @stack('js')
-</body>
+            <!-- Page Content -->
+            <main>
+                @yield('content')
+            </main>
+        </div>
+    </body>
 </html>
