@@ -13,7 +13,7 @@ class CommunityController extends CrudController
     protected $model = Community::class;
     protected $viewFolder = 'communities';
 
-    protected function validateData(Request $request){
+    protected function validateData(Request $request): array{
 
         $communityId = $request->route('community') ?? $request->route()->parameter('id') ?? null;
 
@@ -30,18 +30,18 @@ class CommunityController extends CrudController
         return $request->validate($rules);
     } 
 
-    public function create(){
+    public function create(): \Illuminate\View\View{
         $disciplines = Discipline::pluck('name', 'id')->toArray();
         $users = User::pluck('name', 'id')->toArray();
         return view("{$this->viewFolder}.create", compact('disciplines', 'users'));
     }
-    
-    public function show($id) {
+
+    public function show($id): \Illuminate\View\View{
     $item = Community::with('user', 'discipline')->findOrFail($id);
     return view("{$this->viewFolder}.show", compact('item'));
     }
 
-    public function edit($id){
+    public function edit($id): \Illuminate\View\View{
         $users = User::pluck('name', 'id')->toArray();
         $disciplines = Discipline::pluck('name', 'id')->toArray();
         $item = Community::with('discipline', 'user')->findOrFail($id);
