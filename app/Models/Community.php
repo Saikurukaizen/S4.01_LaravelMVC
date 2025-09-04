@@ -27,11 +27,11 @@ class Community extends Model
         );
     }
 
-    public function discipline(){
+    public function discipline(): \Illuminate\Database\Eloquent\Relations\BelongsTo{
         return $this->belongsTo(Discipline::class);
     }
 
-    public function user(){
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo{
         return $this->belongsTo(User::class);
     }
 }

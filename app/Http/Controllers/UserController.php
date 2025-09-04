@@ -12,7 +12,7 @@ class UserController extends CrudController
     protected $model = User::class;
     protected $viewFolder = 'users';
 
-    protected function validateData(Request $request){
+    protected function validateData(Request $request): array{
 
         $userId = $request->route('user') ?? $request->route()->parameter('id') ?? null;
         $rules = [
@@ -31,18 +31,18 @@ class UserController extends CrudController
         return $request->validate($rules);
     }
 
-    public function create(){
+    public function create(): \Illuminate\View\View{
         $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
         return view("{$this->viewFolder}.create", compact('disciplines'));
     }
 
-    public function show($id) {
+    public function show($id): \Illuminate\View\View {
     $item = User::findOrFail($id);
     $discipline = \App\Models\Discipline::find($item->discipline_id);
     return view("{$this->viewFolder}.show", compact('item', 'discipline'));
     }
 
-    public function edit($id) {
+    public function edit($id): \Illuminate\View\View{
         $item = User::findOrFail($id);
         $disciplines = \App\Models\Discipline::pluck('name', 'id')->toArray();
 

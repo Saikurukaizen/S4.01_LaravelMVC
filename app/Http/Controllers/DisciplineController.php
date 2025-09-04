@@ -11,7 +11,7 @@ class DisciplineController extends CrudController
     protected $model = Discipline::class;
     protected $viewFolder = 'disciplines';
 
-    protected function validateData(Request $request){
+    protected function validateData(Request $request): array{
         return $request->validate([
             'name' => 'required|string|max:50|unique:disciplines,name,' . $request->route('discipline') . ',id',
             'description' => 'required|string|max:255',

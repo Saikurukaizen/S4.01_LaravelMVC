@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DisciplineRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -11,16 +10,12 @@ abstract class CrudController extends Controller{
     protected $model;
     protected $viewFolder;
 
-    /* public function __construct(){
-        $this->middleware(['auth']);
-    } */
-
-    public function index(){
+    public function index(): \Illuminate\View\View{
         $items = $this->model::paginate(10);
         return view("{$this->viewFolder}.index", compact('items'));
     }
 
-    public function create(){
+    public function create(): \Illuminate\View\View{
         return view("{$this->viewFolder}.create");
     }
 
@@ -32,12 +27,12 @@ abstract class CrudController extends Controller{
         ->with('success', 'Created successfully: ' . $item->name);
     }
 
-    public function show($id){
+    public function show($id): \Illuminate\View\View{
         $item = $this->model::findOrFail($id);
         return view("{$this->viewFolder}.show", compact('item'));
     }
 
-    public function edit($id){
+    public function edit($id): \Illuminate\View\View{
         $item = $this->model::findOrFail($id);
         return view("{$this->viewFolder}.update", compact('item'));
     }
@@ -52,7 +47,7 @@ abstract class CrudController extends Controller{
         ->with('success', 'Updated successfully: ' . $item->name);
     }
 
-    public function destroy($id){
+    public function destroy($id): RedirectResponse{
         $item = $this->model::findOrFail($id);
         $item->delete();
 
@@ -60,5 +55,5 @@ abstract class CrudController extends Controller{
         ->with('success', 'Deleted successfully: ' . $item->name);
     }
 
-    abstract protected function validateData(Request $request);
+    abstract protected function validateData(Request $request): array;
 }
