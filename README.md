@@ -4,7 +4,7 @@
 Desarrollado por Marc Sanchez
 
 ## 📄 Descripción
-Fitbit es el nombre de proyecto que contiene un CRUD en Patrón MVC, usando el framework Laravel para su desarrollo. Permite la gestión de usuarios, disciplinas y comunidades, integrando autenticación, verificación de correo y funcionalidades CRUD completas.
+Fitbit es el nombre de proyecto que contiene un CRUD en Patrón MVC, usando el framework Laravel para su desarrollo. Permite la gestión de usuarios, disciplinas y comunidades.
 
 ## Estructura Principal del Proyecto
 
@@ -13,7 +13,6 @@ fitbit/
 ├── app/
 │   └── Http/
 │       └── Controllers/
-│           ├── Auth/                # Controladores de autenticación (Breeze)
 │           ├── CrudController.php   # Controlador base para CRUD
 │           ├── UserController.php   # CRUD de usuarios
 │           ├── DisciplineController.php # CRUD de disciplinas
@@ -32,11 +31,9 @@ fitbit/
 │       ├── users/                   # Vistas CRUD usuarios
 │       ├── disciplines/             # Vistas CRUD disciplinas
 │       ├── communities/             # Vistas CRUD comunidades
-│       └── auth/                    # Vistas de login, registro, etc.
 │
 ├── routes/
 │   ├── web.php                      # Rutas principales y CRUD
-│   └── auth.php                     # Rutas Breeze
 │
 ├── database/
 │   ├── migrations/                  # Migraciones de tablas
@@ -72,14 +69,12 @@ fitbit/
 
 ### 4. Rutas
 - **web.php:** Define rutas principales, CRUD y protección por middleware.
-- **auth.php:** Rutas de autenticación Breeze.
 
 ---
 
 ## Personalización y Buenas Prácticas
 - Usa tu propio nav en el layout principal para mantener coherencia visual.
 - Extiende siempre el layout principal en las vistas (`@extends('layouts.app')`).
-- Protege las rutas CRUD con middleware `auth` y `verified` si usas verificación de email.
 - Mantén las migraciones, seeders y factories alineados con los campos obligatorios de cada modelo.
 - Configura correctamente el envío de correos en `.env` para evitar errores.
 
@@ -128,8 +123,3 @@ composer install
    ```
 5. Accede a la app en `http://localhost:8000` o según tu configuración local.
 
-6. Loggeate para probar el CRUD:
-    - Mail: admin@admin.com
-    - Password: 1234
-
----
